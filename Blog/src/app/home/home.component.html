@@ -1,0 +1,8 @@
+<h1>Home Page</h1>
+<ul>
+    <li *ngFor= "let arch of archives">
+        <a [routerLink]= "['archive', arch.year, arch.month]">
+            {{arch.year+'/'+arch.month}}
+        </a>
+    </li>
+</ul>

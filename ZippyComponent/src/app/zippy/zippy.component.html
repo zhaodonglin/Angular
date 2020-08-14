@@ -1,0 +1,16 @@
+<link href = "http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel = "stylesheet">
+
+<div class="zippy">
+    <div class = "zippy-heading"  [class.expanded]='show'(click)="onClick()"  >
+        {{title}} 
+        <span class='glyphicon' [ngClass] = "{
+            'glyphicon-chevron-up':!show,
+            'glyphicon-chevron-down':show
+        }">
+            
+        </span>
+    </div>
+    <div class="zippy-body" *ngIf='show'>
+        <ng-content></ng-content>
+    </div>
+</div>
