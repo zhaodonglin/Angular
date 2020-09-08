@@ -10,102 +10,48 @@ import {CustomFormsModule} from 'ng2-validation';
 import { DataTableModule } from 'angular5-data-table';
 
 import { AppComponent } from './app.component';
-import { environment } from 'src/environments/environment';
-import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
-import { HomeComponent } from './home/home.component';
-import { ProductsComponent } from './products/products.component';
-import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
-import { OrderSuccessComponent } from './order-success/order-success.component';
-import { MyOrdersComponent } from './my-orders/my-orders.component';
-import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
-import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
-import { LoginComponent } from './login/login.component';
-import { AuthService } from './auth.service';
-import { AuthGuard } from './auth-guard.service';
-import { UserService } from './user.service';
-import { AdminAuthGuard } from './admin-auth-guard.service';
-import { ProductFormComponent } from './admin/product-form/product-form.component';
-import { CategoryService } from './admin/category.service';
-import { ProductService } from './product.service';
-import { ProductFilterComponent } from './products/product-filter/product-filter.component';
-import { ProductCardComponent } from './product-card/product-card.component';
-import { ShoppingCartService } from './shopping-cart.service';
-import { ProductQuantityComponent } from './product-quantity/product-quantity.component';
-import { CheckOutComponent } from './check-out/check-out.component';
-import { OrderService } from './order.service';
-import { ShoppingCartSummaryComponent } from './shopping-cart-summary/shopping-cart-summary.component';
-import { ShippingFormComponent } from './shipping-form/shipping-form.component';
+import { environment } from 'environments/environment';
+import { BsNavbarComponent } from './core/components/bs-navbar/bs-navbar.component';
+import { HomeComponent } from './core/components/home/home.component';
+import { ProductsComponent } from './shopping/components/products/products.component';
+import { ShoppingCartComponent } from './shopping/components/shopping-cart/shopping-cart.component';
+import { OrderSuccessComponent } from './shopping/components/order-success/order-success.component';
+import { MyOrdersComponent } from './shopping/components/my-orders/my-orders.component';
+import { AdminProductsComponent } from './admin/components/admin-products/admin-products.component';
+import { AdminOrdersComponent } from './admin/components/admin-orders/admin-orders.component';
+import { LoginComponent } from './core/components/login/login.component';
+import { AuthGuard } from 'shared/services/auth-guard.service';
+import { AdminAuthGuard } from './admin/services/admin-auth-guard.service';
+import { ProductFormComponent } from './admin/components/product-form/product-form.component';
+import { ProductFilterComponent } from './shopping/components/product-filter/product-filter.component';
+import { CheckOutComponent } from './shopping/components/check-out/check-out.component';
+import { ShoppingCartSummaryComponent } from './shopping/components/shopping-cart-summary/shopping-cart-summary.component';
+import { ShippingFormComponent } from './shopping/components/shipping-form/shipping-form.component';
+import { SharedModule } from 'shared/shared.module';
+import { AdminModule } from './admin/admin.module';
+import { ShoppingModule } from './shopping/shopping.module';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BsNavbarComponent,
-    HomeComponent,
-    LoginComponent,
-    ProductsComponent,
-    ShoppingCartComponent,
-    OrderSuccessComponent,
-    MyOrdersComponent,
-    AdminProductsComponent,
-    AdminOrdersComponent,
-    ProductFormComponent,
-    ProductFilterComponent,
-    ProductCardComponent,
-    ProductQuantityComponent,
-    CheckOutComponent,
-    ShoppingCartSummaryComponent,
-    ShippingFormComponent
+
   ],
   imports: [
+    AdminModule,
+    CoreModule,
+    ShoppingModule,
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule,
-    AngularFireDatabaseModule,
-    DataTableModule,
-    NgbModule,
-    FormsModule,
-    CustomFormsModule,
+
+    SharedModule,
     RouterModule.forRoot([
       {path:'', component:ProductsComponent},
-      {path:'products', component:ProductsComponent},
-      {path:'shopping-cart', component:ShoppingCartComponent},
       {path:'login', component:LoginComponent},
-
-      {path:'check-out', component:CheckOutComponent, canActivate:[AuthGuard]},
-      {path:'order-success/:id', component:OrderSuccessComponent, canActivate:[AuthGuard]},
-      {path:'my/orders', component:MyOrdersComponent, canActivate:[AuthGuard]},
-
-      {
-        path: 'admin/products/new',
-        component:ProductFormComponent,
-        canActivate:[AuthGuard, AdminAuthGuard]
-      },
-      {
-        path: 'admin/products/:id',
-        component:ProductFormComponent,
-        canActivate:[AuthGuard, AdminAuthGuard]
-      },
-      {
-        path: 'admin/products',
-        component:AdminProductsComponent,
-        canActivate:[AuthGuard, AdminAuthGuard]
-      },
-      {
-        path: 'admin/orders',
-        component:AdminOrdersComponent,
-        canActivate:[AuthGuard, AdminAuthGuard]
-      },
     ])
   ],
   providers: [
-    AuthService,
-    AuthGuard,
-    UserService,
-    AdminAuthGuard,
-    CategoryService,
-    ProductService,
-    ShoppingCartService,
-    OrderService
+    
   ],
   bootstrap: [AppComponent]
 })
